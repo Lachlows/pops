@@ -1,0 +1,7 @@
+-canon fixe
+-canon avec spawn précis
+-canon qui peut lancer des projectils
+-cibles qui donnent des points
+-2 équipes différentes
+-calcul des points des 2 équipe
+-apparition des cibles aléatoirement
