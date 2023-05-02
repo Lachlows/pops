@@ -30,8 +30,11 @@ public class ControlOverWS : MonoBehaviour
     
     private System.Action<SocketIOEvent> input1Action,input2Action;
 
-    public GameObject popCorn;
+    public GameObject popCornT1;
+    public GameObject popCornT2;
     Transform playerPosition;
+    public Transform shootSpawnT1;
+    public Transform shootSpawnT2;
     public Vector2 force;
     public int team = 0;
 
@@ -64,7 +67,7 @@ public class ControlOverWS : MonoBehaviour
                 }
                 rgbd.AddForce(direction * power, ForceMode.Impulse);
                 */
-                spawnProjectile(playerPosition, force);
+                spawnProjectile();
                 isActif = true;
                 timer = 0;
                 
@@ -92,22 +95,44 @@ public class ControlOverWS : MonoBehaviour
         GameObject[] gameObjectsWithTag = GameObject.FindGameObjectsWithTag("spawnPoint");
 
         // Initialiser la liste de Transform
-        List<Transform> transformList = new List<Transform>();
+        List<Transform> spawnPointPos = new List<Transform>();
 
         // Ajouter chaque Transform dans la liste
         foreach (GameObject gameObject in gameObjectsWithTag)
         {
-            transformList.Add(gameObject.transform);
+            spawnPointPos.Add(gameObject.transform);
         }
 
-        if (playerPosition.position == transformList[0].position || playerPosition.position == transformList[2].position || playerPosition.position == transformList[4].position || playerPosition.position == transformList[6].position)
+        //checker la position pour définir la team
+        for (int i = 0; i < spawnPointPos.Count ; i++)
         {
-            team = 0;
+            if (playerPosition.position == spawnPointPos[i].position)
+            {
+                if (i % 2 == 0)
+                {
+                    team = 0;
+                    GetComponent<Renderer>().material.color = Color.blue;
+                }
+                else
+                {
+                    team = 1;
+                    GetComponent<Renderer>().material.color = Color.red;
+                }
+            }
+
         }
+
+
+        //ajout des joueur dans la liste
+       /* if (playerPosition.position == spawnPointPos[0].position || playerPosition.position == spawnPointPos[2].position || playerPosition.position == spawnPointPos[4].position || playerPosition.position == spawnPointPos[6].position)
+        {
+
+        } 
         else
         {
-            team = 1;
+
         }
+       */
 
 
     }
@@ -170,15 +195,17 @@ public class ControlOverWS : MonoBehaviour
 
     }
 
-    void spawnProjectile(Transform Pposition, Vector2 Pforce)
+    void spawnProjectile()
     {
-        GameObject projectile = Instantiate (popCorn, Pposition.position, Pposition.rotation);
         if (team == 0)
         {
-            projectile.GetComponent<Rigidbody>().AddForce(Pforce);
+               GameObject projectile = Instantiate(popCornT1, shootSpawnT1.position, shootSpawnT1.rotation);
+            projectile.GetComponent<Rigidbody>().AddForce(force);
         } else
         {
-            projectile.GetComponent<Rigidbody>().AddForce(-Pforce);
+            GameObject projectile = Instantiate(popCornT2, shootSpawnT2.position, shootSpawnT2.rotation);
+            projectile.GetComponent<Rigidbody>().AddForce(-force);
         }
     }
+
 }

@@ -29,5 +29,4 @@ public class ScoreData : MonoBehaviour
         transform.Find("Score").GetComponent<UnityEngine.UI.Text>().text = score.ToString();
     }
     
-    
 }
