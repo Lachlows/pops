@@ -56,7 +56,6 @@ public class spawnState : MonoBehaviour
         } 
         if (numberTeam1 < numberTeam2)
         {
-
             do
             {
                 posToGet = Mathf.RoundToInt(Random.Range(0, numberSpawnPoint));
