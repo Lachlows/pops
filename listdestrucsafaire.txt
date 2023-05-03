@@ -1,7 +1,18 @@
--canon fixe
--canon avec spawn précis
--canon qui peut lancer des projectils
 -cibles qui donnent des points
--2 équipes différentes
 -calcul des points des 2 équipe
--apparition des cibles aléatoirement
+-affichage du score de chaque équipe en cours de partie
+-pouvoir quitter la partie
+-pouvoir revenir dans une partie
+-lancement de la partie seulement si il y a 2 joueur
+-fin de jeu au bout d'un certain nombre de point
+-affichage des points en fin de partie
+-placement aléatoire dans les équipes
+-3 prefab différents
+	-1 donne des points normaux
+	-1 avec de la vie apparait alétoirement 
+	-1 donne plus de point (petit donne plus de points et bouge)
+-chaque prefab donne des points différent
+-prendre un tir ennemi
+-si deux tirs collisionnent, il se détruises
+-barrre qui se remplie vers la fin
+-meilleur joueur de l'équipe
