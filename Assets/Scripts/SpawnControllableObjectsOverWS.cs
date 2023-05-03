@@ -59,6 +59,7 @@ public class SpawnControllableObjectsOverWS : MonoBehaviour
                 GameObject tmp = Instantiate(objectToSpawn,
                                 new Vector3(spawnPoints[activePoint].position.x, spawnPoints[activePoint].position.y, 0),
                                 Quaternion.identity);
+                tmp.GetComponent<ControlOverWS>().playerId = activePoint;
                 // On renome l'objet avec le pseudo du joueur.
                 tmp.name = e.data;
                 // On met à jour l'affichage de son pseudo. 

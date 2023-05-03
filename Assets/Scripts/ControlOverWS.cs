@@ -38,12 +38,17 @@ public class ControlOverWS : MonoBehaviour
     public Vector2 force;
     public int team = 0;
     int spawnPlace = 0 ;
+    public int playerId = 0;
+
+    GameObject spawnMangager;
 
     //public Transform[] transformList;
 
     // Start is called before the first frame update
     void Start()
     {
+        spawnMangager = GameObject.Find("spawnPoints");
+
         initialSize = transform.localScale;
         directionMarkerCurrentLength = directionMarkerInitLength;
         //rgbd = GetComponent<Rigidbody>();
@@ -215,6 +220,7 @@ public class ControlOverWS : MonoBehaviour
     }
     void leaveGame()
     {
+        spawnMangager.GetComponent<spawnState>().leaveGame(playerId);
         Destroy(gameObject);
     }
 

@@ -22,6 +22,18 @@ public class spawnState : MonoBehaviour
 
     public int GetRandomPos()
     {
+
+        for (int i = 0; i < numberSpawnPoint; i++)
+        {
+            if (!stateSpawnPoints[i])
+            {
+                stateSpawnPoints[i] = true;
+                return i;
+            }
+        }
+        return -1;
+
+        /*
         int posToGet = 0;
         numberTeam1 = 0;
         numberTeam2 = 0;
@@ -40,26 +52,27 @@ public class spawnState : MonoBehaviour
                 }
             }
         }
-        if (numberTeam1 == numberTeam2)
-        {
-            do
-            {
-                posToGet = Mathf.RoundToInt(Random.Range(0, numberSpawnPoint));
-            } while (stateSpawnPoints[posToGet]);
-        } 
+
         if (numberTeam1 > numberTeam2) 
         {
             do
             {
                 posToGet = Mathf.RoundToInt(Random.Range(0, numberSpawnPoint));
-            } while (posToGet % 2 != 0 && stateSpawnPoints[posToGet]);
+            } while ((posToGet % 2 != 0 || posToGet != 0) && stateSpawnPoints[posToGet]);
         } 
-        if (numberTeam1 < numberTeam2)
+        else if (numberTeam1 < numberTeam2)
         {
             do
             {
                 posToGet = Mathf.RoundToInt(Random.Range(0, numberSpawnPoint));
-            } while ((posToGet % 2 == 0 || posToGet!=0) && stateSpawnPoints[posToGet]);
+            } while ((posToGet % 2 == 0 || posToGet == 0) && stateSpawnPoints[posToGet]);
+        }
+        else
+        {
+            do
+            {
+                posToGet = Mathf.RoundToInt(Random.Range(0, numberSpawnPoint));
+            } while (stateSpawnPoints[posToGet]);
         }
         stateSpawnPoints[posToGet] = true;
 
@@ -81,6 +94,8 @@ public class spawnState : MonoBehaviour
             }
         }
         return posToGet;
+        */
+
     }
     public bool CheckIfIsFull ()
     {
@@ -92,5 +107,10 @@ public class spawnState : MonoBehaviour
             }
         }
         return true;
+    }
+
+    public void leaveGame(int id)
+    {
+        stateSpawnPoints[id] = false;
     }
 }
