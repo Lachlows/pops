@@ -26,14 +26,14 @@ public class teamScore : MonoBehaviour
     public GameObject winLayerT2;
     public bool endGame = false;
 
-    public void addinScoreToTeam (int teamId)
+    public void addinScoreToTeam (int teamId, int point)
     {
         if (teamId==0)
         {
-            ScoreT1++;
+            ScoreT1+= point;
         }else
         {
-            ScoreT2++;
+            ScoreT2 += point;
         }
         updateScore();
 

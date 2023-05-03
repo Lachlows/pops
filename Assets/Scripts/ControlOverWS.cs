@@ -40,6 +40,8 @@ public class ControlOverWS : MonoBehaviour
     int spawnPlace = 0 ;
     public int playerId = 0;
 
+    public int personalPlayerScore = 0;
+
     GameObject spawnMangager;
     public GameObject startManager;
     public GameObject scoreManager;
@@ -54,7 +56,7 @@ public class ControlOverWS : MonoBehaviour
         startManager = GameObject.Find("gameStarter");
         scoreManager = GameObject.Find("teamScoreManager");
 
-
+        //gameObject.name = gameObject.name.Replace("\"", "");
 
         initialSize = transform.localScale;
         directionMarkerCurrentLength = directionMarkerInitLength;
@@ -218,11 +220,16 @@ public class ControlOverWS : MonoBehaviour
             //popAction script = projectile.GetComponent<popAction>();
             projectile.GetComponent<popAction>().teamId = 0;
             projectile.GetComponent<Rigidbody>().AddForce(force);
-        } else
+
+            projectile.GetComponent<popAction>().playerObject = gameObject;
+        }
+        else
         {
             GameObject projectile = Instantiate(popCornT, shootSpawnT2.position, shootSpawnT2.rotation);
             projectile.GetComponent<popAction>().teamId = 1;
             projectile.GetComponent<Rigidbody>().AddForce(-force);
+
+            projectile.GetComponent<popAction>().playerObject = gameObject;
         }
     }
     void leaveGame()
@@ -233,4 +240,8 @@ public class ControlOverWS : MonoBehaviour
         gameObject.SetActive(false);
     }
 
+    public void addinScoreToPerso(int point)
+    {
+        personalPlayerScore += point;
+    }
 }

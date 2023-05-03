@@ -5,8 +5,12 @@ using UnityEngine;
 public class popAction : MonoBehaviour
 {
     public int teamId = 0;
-    GameObject playerScore;
+    //GameObject playerScore;
     public GameObject scoreManager;
+    public int scoreMalus = -1;
+
+    public GameObject playerObject;
+
 
 
     private void Start()
@@ -31,12 +35,29 @@ public class popAction : MonoBehaviour
 
         if (collision.gameObject.tag == "Player")
         {
+            if(collision.gameObject.GetComponent<ControlOverWS>().team==0 && playerScore.GetComponent<teamScore>().ScoreT1>0)
+            {
+                playerScore.GetComponent<teamScore>().addinScoreToTeam(0, scoreMalus);
+
+            } else if (collision.gameObject.GetComponent<ControlOverWS>().team == 1 && playerScore.GetComponent<teamScore>().ScoreT2 > 0)
+            {
+                playerScore.GetComponent<teamScore>().addinScoreToTeam(1, scoreMalus);
+            }
+            if (collision.gameObject.GetComponent<ControlOverWS>().personalPlayerScore> 0)
+            {
+                collision.gameObject.GetComponent<ControlOverWS>().addinScoreToPerso(scoreMalus);
+            }
             Destroy(gameObject);
         }
         else if (collision.gameObject.tag == "target")
         {
-            playerScore.GetComponent<teamScore>().addinScoreToTeam(teamId);
-            Destroy(collision.gameObject);
+            collision.gameObject.GetComponent<targetInfo>().life--;
+            if (collision.gameObject.GetComponent<targetInfo>().life <= 0)
+            {
+                playerScore.GetComponent<teamScore>().addinScoreToTeam(teamId, collision.gameObject.GetComponent<targetInfo>().pointToTeam);
+                playerObject.GetComponent<ControlOverWS>().addinScoreToPerso(collision.gameObject.GetComponent<targetInfo>().pointToTeam);
+                Destroy(collision.gameObject);
+            }
             Destroy(gameObject);
 
         }

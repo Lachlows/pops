@@ -8,12 +8,13 @@ Xfin de jeu au bout d'un certain nombre de point
 Xaffichage des points en fin de partie
 Xplacement aléatoire dans les équipes
 -3 prefab différents
-	-1 donne des points normaux
-	-1 avec de la vie apparait alétoirement 
-	-1 donne plus de point (petit donne plus de points et bouge)
--chaque prefab donne des points différent
--prendre un tir ennemi
+	X1 donne des points normaux
+	X1 avec de la vie apparait alétoirement 
+	X1 donne plus de point (petit donne plus de points et bouge)
+Xchaque prefab donne des points différent
+Xprendre un tir ennemi
 Xsi deux tirs collisionnent, il se détruises
+Xretenir score par joueur
 -barrre qui se remplie vers la fin
 -meilleur joueur de l'équipe
 

@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.37311918, g: 0.3807398, b: 0.35872716, a: 1}
+  m_IndirectSpecularColor: {r: 0.37311953, g: 0.38074014, b: 0.3587274, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1155,7 +1155,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f07c5d5b428e86d4aaa6239b4eef6cc7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  target: {fileID: 1834238698426619400, guid: 5f30b71417dec5d448ebb64037397181, type: 3}
+  target:
+  - {fileID: 1834238698426619400, guid: 5f30b71417dec5d448ebb64037397181, type: 3}
+  - {fileID: 1834238698426619400, guid: bab32842ff599ba4eabb30403f1d27f8, type: 3}
+  - {fileID: 1834238698426619400, guid: 7731ec9cc84039842897ab429f54bbad, type: 3}
   startManager: {fileID: 1157265326}
   scoreManager: {fileID: 0}
 --- !u!4 &924702811
@@ -1484,7 +1487,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ScoreT1: 0
   ScoreT2: 0
-  maxScore: 2
+  maxScore: 20
   textT1: {fileID: 1493261891}
   textT2: {fileID: 2132849711}
   textTeam1Win1: {fileID: 2031233635}

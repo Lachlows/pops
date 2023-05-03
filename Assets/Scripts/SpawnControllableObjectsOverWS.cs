@@ -75,7 +75,7 @@ public class SpawnControllableObjectsOverWS : MonoBehaviour
                 // On met à jour l'affichage de son pseudo. 
                 if (tmp.transform.GetComponentInChildren<TMPro.TextMeshPro>())
                 {
-                    tmp.transform.GetComponentInChildren<TMPro.TextMeshPro>().text = tmp.name;
+                    tmp.transform.GetComponentInChildren<TMPro.TextMeshPro>().text = tmp.name.Replace("\"", "");
                 }
                 // On ajouter le joueur à la liste des joueurs instanciés.
                 GameManager.instance.spawnedObjects.Add(tmp);
@@ -87,7 +87,7 @@ public class SpawnControllableObjectsOverWS : MonoBehaviour
                 uiTmp.transform.SetParent(GameManager.instance.scoreCanvas.transform);
                 Debug.Log("nb players " + GameManager.instance.spawnedObjects.Count);
                 uiTmp.GetComponent<RectTransform>().position = new Vector3((200 * GameManager.instance.spawnedObjects.Count), 1080 - 150, 0);
-                uiTmp.transform.Find("Pseudo").GetComponent<UnityEngine.UI.Text>().text = tmp.name;
+                uiTmp.transform.Find("Pseudo").GetComponent<UnityEngine.UI.Text>().text = tmp.name.Replace("\"", "");
                 tmp.GetComponent<ControlOverWS>().scoreDisplay = uiTmp;
                 GameManager.instance.scoreList.Add(uiTmp.GetComponent<ScoreData>());
             }
