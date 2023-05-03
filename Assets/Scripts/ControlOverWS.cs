@@ -220,8 +220,10 @@ public class ControlOverWS : MonoBehaviour
     }
     void leaveGame()
     {
+        gameObject.transform.GetComponentInChildren<TMPro.TextMeshPro>().text = "none";
+        gameObject.name = "none";
         spawnMangager.GetComponent<spawnState>().leaveGame(playerId);
-        Destroy(gameObject);
+        gameObject.SetActive(false);
     }
 
 }

@@ -46,7 +46,12 @@ public class SpawnControllableObjectsOverWS : MonoBehaviour
             //if (activePoint < spawnPoints.Length) {
             // Lorsqu'on recoit un message "spawn".
             // On verifie qu'il n'existe pas déjà un joueur du même nom.
-            if (GameManager.instance.spawnedObjects.Find(x => x.name == e.data) == null && !spawnMangager.GetComponent<spawnState>().CheckIfIsFull())
+            //if (GameManager.instance.spawnedObjects.Find(x => x.name == e.data) == null && !spawnMangager.GetComponent<spawnState>().CheckIfIsFull())
+            /*if (GameManager.instance.spawnedObjects.Find(x => x.name == e.data) == null || !GameManager.instance.spawnedObjects.Find(x => x.name == e.data).active)
+                {
+
+                }*/
+            if (!spawnMangager.GetComponent<spawnState>().CheckIfIsFull() && ((GameManager.instance.spawnedObjects.Find(x => x.name == e.data) == null)))            
             {
                 //Si on ne trouve pas son nom dans la liste des joueurs instanciés,
                 //C'est un nouveau joueur. On doit donc l'instancier.
