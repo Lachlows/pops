@@ -8,8 +8,23 @@ public class teamScore : MonoBehaviour
     public int ScoreT1 = 0;
     public int ScoreT2 = 0;
 
+    public int maxScore = 0;
+
     public TextMeshProUGUI textT1;
     public TextMeshProUGUI textT2;
+    public TextMeshProUGUI textTeam1Win1;
+    public TextMeshProUGUI textTeam2Win1;
+    public TextMeshProUGUI textTeam1Win2;
+    public TextMeshProUGUI textTeam2Win2;
+    public string textToWinT1 = "Score Team 1 : ";
+    public string textToWinT2 = "Score Team 2 : ";
+
+    bool winTeam1 =false;
+    bool winTeam2 =false;
+
+    public GameObject winLayerT1;
+    public GameObject winLayerT2;
+    public bool endGame = false;
 
     public void addinScoreToTeam (int teamId)
     {
@@ -30,5 +45,19 @@ public class teamScore : MonoBehaviour
         textT1.text = ScoreT1.ToString("00");
         //string scoreTextToPrintT2 = ScoreT2.ToString("00");
         textT2.text = ScoreT2.ToString("00");
+        if (ScoreT1>= maxScore)
+        {
+            winLayerT1.SetActive(true);
+            textTeam1Win1.text = textToWinT1+ ScoreT1.ToString("00");
+            textTeam2Win1.text = textToWinT2 + ScoreT2.ToString("00");
+            winTeam1 = true;
+            endGame = true;
+        } else if (ScoreT2 >= maxScore) {
+            winLayerT2.SetActive(true);
+            textTeam1Win2.text = textToWinT1 + ScoreT1.ToString("00");
+            textTeam2Win2.text = textToWinT2 + ScoreT2.ToString("00");
+            winTeam2 = true;
+            endGame = true;
+        }
     }
 }

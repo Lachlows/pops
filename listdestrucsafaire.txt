@@ -2,18 +2,18 @@ Xcibles qui donnent des points
 Xcalcul des points des 2 équipe
 xaffichage du score de chaque équipe en cours de partie
 Xpouvoir quitter la partie
--pouvoir revenir dans une partie
--lancement de la partie seulement si il y a 2 joueur
--fin de jeu au bout d'un certain nombre de point
--affichage des points en fin de partie
--placement aléatoire dans les équipes
+Xpouvoir revenir dans une partie
+Xlancement de la partie seulement si il y a 2 joueur
+Xfin de jeu au bout d'un certain nombre de point
+Xaffichage des points en fin de partie
+Xplacement aléatoire dans les équipes
 -3 prefab différents
 	-1 donne des points normaux
 	-1 avec de la vie apparait alétoirement 
 	-1 donne plus de point (petit donne plus de points et bouge)
 -chaque prefab donne des points différent
 -prendre un tir ennemi
--si deux tirs collisionnent, il se détruises
+Xsi deux tirs collisionnent, il se détruises
 -barrre qui se remplie vers la fin
 -meilleur joueur de l'équipe
 

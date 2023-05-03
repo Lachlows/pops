@@ -41,6 +41,9 @@ public class ControlOverWS : MonoBehaviour
     public int playerId = 0;
 
     GameObject spawnMangager;
+    public GameObject startManager;
+    public GameObject scoreManager;
+
 
     //public Transform[] transformList;
 
@@ -48,6 +51,10 @@ public class ControlOverWS : MonoBehaviour
     void Start()
     {
         spawnMangager = GameObject.Find("spawnPoints");
+        startManager = GameObject.Find("gameStarter");
+        scoreManager = GameObject.Find("teamScoreManager");
+
+
 
         initialSize = transform.localScale;
         directionMarkerCurrentLength = directionMarkerInitLength;
@@ -58,7 +65,7 @@ public class ControlOverWS : MonoBehaviour
 
         input1Action = (SocketIOEvent e) => {
 
-            if (e.data == gameObject.name)
+            if (e.data == gameObject.name && startManager.GetComponent<startGame>().gameHasStart && !scoreManager.GetComponent<teamScore>().endGame)
             {
                 
                 Debug.Log("SHOOT");

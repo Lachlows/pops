@@ -10,6 +10,8 @@ public class spawnState : MonoBehaviour
 
     public int numberTeam1;
     public int numberTeam2;
+
+    public int playerNumber;
     // Start is called before the first frame update
     void Start()
     {
@@ -112,5 +114,17 @@ public class spawnState : MonoBehaviour
     public void leaveGame(int id)
     {
         stateSpawnPoints[id] = false;
+    }
+
+    private void Update()
+    {
+        playerNumber = 0;
+        for (int i = 0; i < numberSpawnPoint; i++)
+        {
+            if (stateSpawnPoints[i])
+            {
+                playerNumber++;
+            }
+        }
     }
 }

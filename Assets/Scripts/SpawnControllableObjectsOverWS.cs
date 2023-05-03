@@ -11,14 +11,19 @@ public class SpawnControllableObjectsOverWS : MonoBehaviour
     public Transform[] spawnPoints;
     public int activePoint = 0;
     public GameObject spawnMangager;
+    public GameObject scoreManager;
+
 
     SocketIOController io;
 
     // Start is called before the first frame update
     void Start()
     {
-        //creer le tableau d'état
         spawnMangager = GameObject.Find("spawnPoints");
+        scoreManager = GameObject.Find("teamScoreManager");
+
+
+        //creer le tableau d'état
 
         if (instance == null)
         {
@@ -51,7 +56,7 @@ public class SpawnControllableObjectsOverWS : MonoBehaviour
                 {
 
                 }*/
-            if (!spawnMangager.GetComponent<spawnState>().CheckIfIsFull() && ((GameManager.instance.spawnedObjects.Find(x => x.name == e.data) == null)))            
+            if (!spawnMangager.GetComponent<spawnState>().CheckIfIsFull() && (GameManager.instance.spawnedObjects.Find(x => x.name == e.data) == null) && !scoreManager.GetComponent<teamScore>().endGame)            
             {
                 //Si on ne trouve pas son nom dans la liste des joueurs instanciés,
                 //C'est un nouveau joueur. On doit donc l'instancier.

@@ -6,9 +6,12 @@ public class popAction : MonoBehaviour
 {
     public int teamId = 0;
     GameObject playerScore;
+    public GameObject scoreManager;
+
 
     private void Start()
     {
+        scoreManager = GameObject.Find("teamScoreManager");
         GameObject playerScore = GameObject.Find("teamScoreManager");
 
         if (teamId == 0)
@@ -38,6 +41,13 @@ public class popAction : MonoBehaviour
 
         }
         else if (collision.gameObject.tag == "projectile")
+        {
+            Destroy(gameObject);
+        }
+    }
+    private void FixedUpdate()
+    {
+        if (scoreManager.GetComponent<teamScore>().endGame)
         {
             Destroy(gameObject);
         }
