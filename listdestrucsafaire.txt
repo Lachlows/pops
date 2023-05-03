@@ -1,7 +1,7 @@
 Xcibles qui donnent des points
 Xcalcul des points des 2 équipe
 xaffichage du score de chaque équipe en cours de partie
--pouvoir quitter la partie
+Xpouvoir quitter la partie
 -pouvoir revenir dans une partie
 -lancement de la partie seulement si il y a 2 joueur
 -fin de jeu au bout d'un certain nombre de point
@@ -16,3 +16,6 @@ xaffichage du score de chaque équipe en cours de partie
 -si deux tirs collisionnent, il se détruises
 -barrre qui se remplie vers la fin
 -meilleur joueur de l'équipe
+
+-voir pour écran de fin tel
+-

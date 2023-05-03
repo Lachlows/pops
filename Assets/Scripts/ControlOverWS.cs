@@ -37,6 +37,7 @@ public class ControlOverWS : MonoBehaviour
     public Transform shootSpawnT2;
     public Vector2 force;
     public int team = 0;
+    int spawnPlace = 0 ;
 
     //public Transform[] transformList;
 
@@ -78,12 +79,13 @@ public class ControlOverWS : MonoBehaviour
         input2Action = (SocketIOEvent e) => {
             if (e.data == gameObject.name)
             {
-                if (directionMarker)
+                leaveGame();
+                /*if (directionMarker)
                 {
                     directionMarker.GetComponent<TurnAround>().rotationSpeed *= -1;
                     isActif = true;
                     timer = 0;
-                }
+                }*/
             }
         };
 
@@ -108,6 +110,7 @@ public class ControlOverWS : MonoBehaviour
         {
             if (playerPosition.position == spawnPointPos[i].position)
             {
+                spawnPlace = i;
                 if (i % 2 == 0)
                 {
                     team = 0;
@@ -209,6 +212,10 @@ public class ControlOverWS : MonoBehaviour
             projectile.GetComponent<popAction>().teamId = 1;
             projectile.GetComponent<Rigidbody>().AddForce(-force);
         }
+    }
+    void leaveGame()
+    {
+        Destroy(gameObject);
     }
 
 }

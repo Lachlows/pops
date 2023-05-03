@@ -10,12 +10,16 @@ public class SpawnControllableObjectsOverWS : MonoBehaviour
     public GameObject objectToSpawn;
     public Transform[] spawnPoints;
     public int activePoint = 0;
+    public GameObject spawnMangager;
 
     SocketIOController io;
 
     // Start is called before the first frame update
     void Start()
     {
+        //creer le tableau d'état
+        spawnMangager = GameObject.Find("spawnPoints");
+
         if (instance == null)
         {
             instance = this;
@@ -39,20 +43,22 @@ public class SpawnControllableObjectsOverWS : MonoBehaviour
         // Et pour accèder précisément au pseudo du joueur. il faudra utiliser cette syntaxe: e.data
         io.On("spawn", (SocketIOEvent e) =>
         {
-            if (activePoint < spawnPoints.Length) {
+            //if (activePoint < spawnPoints.Length) {
             // Lorsqu'on recoit un message "spawn".
             // On verifie qu'il n'existe pas déjà un joueur du même nom.
-            if (GameManager.instance.spawnedObjects.Find(x => x.name == e.data) == null)
+            if (GameManager.instance.spawnedObjects.Find(x => x.name == e.data) == null && !spawnMangager.GetComponent<spawnState>().CheckIfIsFull())
             {
                 //Si on ne trouve pas son nom dans la liste des joueurs instanciés,
                 //C'est un nouveau joueur. On doit donc l'instancier.
 
                 Debug.Log(e.data);// On affiche dans la console le pseudo joueur.
+
+                activePoint = spawnMangager.GetComponent<spawnState>().GetRandomPos();
+
                 // On instancie un prefab joueur.
                 GameObject tmp = Instantiate(objectToSpawn,
                                 new Vector3(spawnPoints[activePoint].position.x, spawnPoints[activePoint].position.y, 0),
                                 Quaternion.identity);
-                    activePoint++;
                 // On renome l'objet avec le pseudo du joueur.
                 tmp.name = e.data;
                 // On met à jour l'affichage de son pseudo. 
@@ -79,7 +85,7 @@ public class SpawnControllableObjectsOverWS : MonoBehaviour
                 Debug.Log("User" + e.data + " already exist");
             }
 
-            }
+            //}
         });
 
     }
