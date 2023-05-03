@@ -394,9 +394,7 @@ MonoBehaviour:
   scoreTickDelay: 2
   scoreTickTimer: 0
   scoreDisplay: {fileID: 0}
-  popCornT1: {fileID: 5237126782515506883, guid: c57e2de696fb24c43a67a74924134283,
-    type: 3}
-  popCornT2: {fileID: 5237126782515506883, guid: 6a63c22274390b748836396907a87622,
+  popCornT: {fileID: 5237126782515506883, guid: c57e2de696fb24c43a67a74924134283,
     type: 3}
   shootSpawnT1: {fileID: 8263405979713679086}
   shootSpawnT2: {fileID: 8661112629926740137}

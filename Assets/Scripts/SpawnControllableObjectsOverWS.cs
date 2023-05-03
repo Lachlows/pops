@@ -24,7 +24,7 @@ public class SpawnControllableObjectsOverWS : MonoBehaviour
         {
             Destroy(this);
         }
-        
+
         io = SocketIOController.instance;
         io.On("connect", (SocketIOEvent e) =>
         {
@@ -39,52 +39,44 @@ public class SpawnControllableObjectsOverWS : MonoBehaviour
         // Et pour accèder précisément au pseudo du joueur. il faudra utiliser cette syntaxe: e.data
         io.On("spawn", (SocketIOEvent e) =>
         {
+            if (activePoint < spawnPoints.Length) {
             // Lorsqu'on recoit un message "spawn".
             // On verifie qu'il n'existe pas déjà un joueur du même nom.
-            if (activePoint<=8)
-            {
-                if (GameManager.instance.spawnedObjects.Find(x => x.name == e.data) == null)
+            if (GameManager.instance.spawnedObjects.Find(x => x.name == e.data) == null)
             {
                 //Si on ne trouve pas son nom dans la liste des joueurs instanciés,
                 //C'est un nouveau joueur. On doit donc l'instancier.
-                
-                Debug.Log(e.data);// On affiche dans la console le pseudo joueur.
 
+                Debug.Log(e.data);// On affiche dans la console le pseudo joueur.
                 // On instancie un prefab joueur.
                 GameObject tmp = Instantiate(objectToSpawn,
                                 new Vector3(spawnPoints[activePoint].position.x, spawnPoints[activePoint].position.y, 0),
                                 Quaternion.identity);
-
-                activePoint++;
-
+                    activePoint++;
                 // On renome l'objet avec le pseudo du joueur.
                 tmp.name = e.data;
-
                 // On met à jour l'affichage de son pseudo. 
                 if (tmp.transform.GetComponentInChildren<TMPro.TextMeshPro>())
                 {
                     tmp.transform.GetComponentInChildren<TMPro.TextMeshPro>().text = tmp.name;
                 }
-
                 // On ajouter le joueur à la liste des joueurs instanciés.
                 GameManager.instance.spawnedObjects.Add(tmp);
-                
+
                 // Début de code pour générer une UI pour les scores.
                 // Attention - ce code n'est pas finalisé.
-                
+
                 GameObject uiTmp = Instantiate(GameManager.instance.playerScorePrefab);
                 uiTmp.transform.SetParent(GameManager.instance.scoreCanvas.transform);
-                Debug.Log("nb players "+ GameManager.instance.spawnedObjects.Count);
-                uiTmp.GetComponent<RectTransform>().position = new Vector3((200*GameManager.instance.spawnedObjects.Count),1080-150,0);
+                Debug.Log("nb players " + GameManager.instance.spawnedObjects.Count);
+                uiTmp.GetComponent<RectTransform>().position = new Vector3((200 * GameManager.instance.spawnedObjects.Count), 1080 - 150, 0);
                 uiTmp.transform.Find("Pseudo").GetComponent<UnityEngine.UI.Text>().text = tmp.name;
                 tmp.GetComponent<ControlOverWS>().scoreDisplay = uiTmp;
                 GameManager.instance.scoreList.Add(uiTmp.GetComponent<ScoreData>());
-
-            
             }
             else// Si le joueur est déjà dans la liste, on ne l'instancie pas à nouveau.
             {
-                Debug.Log("User" + e.data +" already exist");
+                Debug.Log("User" + e.data + " already exist");
             }
 
             }

@@ -30,8 +30,8 @@ public class ControlOverWS : MonoBehaviour
     
     private System.Action<SocketIOEvent> input1Action,input2Action;
 
-    public GameObject popCornT1;
-    public GameObject popCornT2;
+    public GameObject popCornT;
+    //public GameObject popCornT2;
     Transform playerPosition;
     public Transform shootSpawnT1;
     public Transform shootSpawnT2;
@@ -191,7 +191,7 @@ public class ControlOverWS : MonoBehaviour
         io.Off("input1", input1Action);
         io.Off("input2", input2Action);
         Destroy(scoreDisplay);
-        GameManager.instance.scoreList.Remove(scoreDisplay.GetComponent<ScoreData>());
+        //GameManager.instance.scoreList.Remove(scoreDisplay.GetComponent<ScoreData>());
 
     }
 
@@ -199,11 +199,14 @@ public class ControlOverWS : MonoBehaviour
     {
         if (team == 0)
         {
-               GameObject projectile = Instantiate(popCornT1, shootSpawnT1.position, shootSpawnT1.rotation);
+            GameObject projectile = Instantiate(popCornT, shootSpawnT1.position, shootSpawnT1.rotation);
+            //popAction script = projectile.GetComponent<popAction>();
+            projectile.GetComponent<popAction>().teamId = 0;
             projectile.GetComponent<Rigidbody>().AddForce(force);
         } else
         {
-            GameObject projectile = Instantiate(popCornT2, shootSpawnT2.position, shootSpawnT2.rotation);
+            GameObject projectile = Instantiate(popCornT, shootSpawnT2.position, shootSpawnT2.rotation);
+            projectile.GetComponent<popAction>().teamId = 1;
             projectile.GetComponent<Rigidbody>().AddForce(-force);
         }
     }
