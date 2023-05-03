@@ -14,8 +14,8 @@ GameObject:
   - component: {fileID: 516987273002532178}
   - component: {fileID: 3952762347503304171}
   m_Layer: 0
-  m_Name: PopCornT1
-  m_TagString: Untagged
+  m_Name: PopCornT
+  m_TagString: projectile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

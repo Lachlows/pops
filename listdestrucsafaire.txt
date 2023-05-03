@@ -1,6 +1,6 @@
--cibles qui donnent des points
--calcul des points des 2 équipe
--affichage du score de chaque équipe en cours de partie
+Xcibles qui donnent des points
+Xcalcul des points des 2 équipe
+xaffichage du score de chaque équipe en cours de partie
 -pouvoir quitter la partie
 -pouvoir revenir dans une partie
 -lancement de la partie seulement si il y a 2 joueur
