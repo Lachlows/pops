@@ -33,8 +33,6 @@ public class teamScore : MonoBehaviour
     {
         //animatorBarreT1 = barreT1.GetComponent<Animator>();
        // animatorBarreT2 = barreT2.GetComponent<Animator>();
-        animatorBarreT1.StopPlayback();
-        animatorBarreT2.StopPlayback();
     }
 
     public void addinScoreToTeam (int teamId, int point)
@@ -56,11 +54,29 @@ public class teamScore : MonoBehaviour
         textT1.text = ScoreT1.ToString("00");
         //string scoreTextToPrintT2 = ScoreT2.ToString("00");
         textT2.text = ScoreT2.ToString("00");
+
+        // animatorBarreT1.Play("calcT1", -1, (ScoreT1 / maxScore) * 100);
+        // animatorBarreT2.Play("calcT2", -1, (ScoreT2 / maxScore) * 100);
+
+        //animatorBarreT1.Play("calcT1", 0, 0.5f);
+        float scoreT1Pourcent = ((float)ScoreT1 / maxScore);
+        float scoreT2Pourcent = ((float)ScoreT2 / maxScore);
+
+        Debug.Log("time barre 1 : " + scoreT1Pourcent + " time barre 2 : " + scoreT2Pourcent);
+
+
+        animatorBarreT1.Play("calcT1", 0, scoreT2Pourcent);
+        animatorBarreT1.CrossFade("calcT1", 0.2f);
+        animatorBarreT2.Play("calcT2", 0, scoreT1Pourcent);
+        //animatorBarreT2.Play("calcT2", 0,0.5f);
+        animatorBarreT2.CrossFade("calcT2", 0.2f);
+
         if (ScoreT1>= maxScore)
         {
             winLayerT1.SetActive(true);
             textTeam1Win1.text = textToWinT1+ ScoreT1.ToString("00");
             textTeam2Win1.text = textToWinT2 + ScoreT2.ToString("00");
+
             winTeam1 = true;
             endGame = true;
         } else if (ScoreT2 >= maxScore) {

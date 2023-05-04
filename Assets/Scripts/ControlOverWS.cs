@@ -289,6 +289,7 @@ public class ControlOverWS : MonoBehaviour
             rb.AddForce(new Vector2(-y,-x));
 
             projectile.GetComponent<popAction>().playerObject = gameObject;
+            projectile.GetComponent<popAction>().teamId = 1;
 
         }
     }
