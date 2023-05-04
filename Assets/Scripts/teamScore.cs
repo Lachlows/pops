@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.SceneManagement;
+
 
 public class teamScore : MonoBehaviour
 {
@@ -28,6 +30,8 @@ public class teamScore : MonoBehaviour
 
     public Animator animatorBarreT1;
     public Animator animatorBarreT2;
+
+    public float timeToRestart = 8f;
 
     private void Start()
     {
@@ -73,18 +77,33 @@ public class teamScore : MonoBehaviour
 
         if (ScoreT1>= maxScore)
         {
+            //Invoke("ReloadCurrentScene", timeToRestart);
+
             winLayerT1.SetActive(true);
             textTeam1Win1.text = textToWinT1+ ScoreT1.ToString("00");
             textTeam2Win1.text = textToWinT2 + ScoreT2.ToString("00");
 
             winTeam1 = true;
             endGame = true;
-        } else if (ScoreT2 >= maxScore) {
+            StartCoroutine(ReloadCurrentScene());
+
+        }
+        else if (ScoreT2 >= maxScore) {
+            //Invoke("ReloadCurrentScene", timeToRestart);
+
             winLayerT2.SetActive(true);
             textTeam1Win2.text = textToWinT1 + ScoreT1.ToString("00");
             textTeam2Win2.text = textToWinT2 + ScoreT2.ToString("00");
             winTeam2 = true;
             endGame = true;
+            StartCoroutine(ReloadCurrentScene());
+
+        }
+
+        IEnumerator ReloadCurrentScene()
+        {
+            yield return new WaitForSeconds(timeToRestart);
+            SceneManager.LoadScene(0);
         }
     }
 }

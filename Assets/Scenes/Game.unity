@@ -2480,7 +2480,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ScoreT1: 0
   ScoreT2: 0
-  maxScore: 20
+  maxScore: 2
   textT1: {fileID: 1493261891}
   textT2: {fileID: 2132849711}
   textTeam1Win1: {fileID: 974255452}
@@ -2494,6 +2494,7 @@ MonoBehaviour:
   endGame: 0
   animatorBarreT1: {fileID: 49039800}
   animatorBarreT2: {fileID: 370692411}
+  timeToRestart: 8
 --- !u!4 &990224126
 Transform:
   m_ObjectHideFlags: 0
