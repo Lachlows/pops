@@ -206,22 +206,6 @@
 </div> 
 -->
 
-<script>
-  $(function () {
-    var socket = io();
-    $('#spawn').submit(function(){
-		console.log('{pseudo:'+$('#pseudo').val()+'}');
-		var msg =  $('#pseudo').val();
-      socket.emit('spawn',msg);
-      return false;
-    });
-	
-	
-		
-
-	
-   
-  });
 </script>
 <body>
 

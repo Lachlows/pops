@@ -72,7 +72,7 @@ public class ControlOverWS : MonoBehaviour
             string[] data = e.data.Replace("\"", "").Split(",");
             Debug.Log(data[0]+ data[1] + data[2]);
 
-            if (e.data == gameObject.name && startManager.GetComponent<startGame>().gameHasStart && !scoreManager.GetComponent<teamScore>().endGame)
+            if (data[0] == gameObject.name && startManager.GetComponent<startGame>().gameHasStart && !scoreManager.GetComponent<teamScore>().endGame)
             {
                 
                 Debug.Log("SHOOT");
@@ -97,7 +97,8 @@ public class ControlOverWS : MonoBehaviour
         };
 
         input2Action = (SocketIOEvent e) => {
-            if (e.data == gameObject.name)
+            string data = e.data.Replace("\"", "");
+            if (data == gameObject.name)
             {
                 leaveGame();
                 /*if (directionMarker)
