@@ -26,6 +26,17 @@ public class teamScore : MonoBehaviour
     public GameObject winLayerT2;
     public bool endGame = false;
 
+    public Animator animatorBarreT1;
+    public Animator animatorBarreT2;
+
+    private void Start()
+    {
+        //animatorBarreT1 = barreT1.GetComponent<Animator>();
+       // animatorBarreT2 = barreT2.GetComponent<Animator>();
+        animatorBarreT1.StopPlayback();
+        animatorBarreT2.StopPlayback();
+    }
+
     public void addinScoreToTeam (int teamId, int point)
     {
         if (teamId==0)

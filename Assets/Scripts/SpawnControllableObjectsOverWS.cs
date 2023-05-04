@@ -48,6 +48,10 @@ public class SpawnControllableObjectsOverWS : MonoBehaviour
         // Et pour accèder précisément au pseudo du joueur. il faudra utiliser cette syntaxe: e.data
         io.On("spawn", (SocketIOEvent e) =>
         {
+            string data = e.data.Replace("\"", "");
+
+            Debug.Log(data); 
+            
             //if (activePoint < spawnPoints.Length) {
             // Lorsqu'on recoit un message "spawn".
             // On verifie qu'il n'existe pas déjà un joueur du même nom.
@@ -56,12 +60,13 @@ public class SpawnControllableObjectsOverWS : MonoBehaviour
                 {
 
                 }*/
-            if (!spawnMangager.GetComponent<spawnState>().CheckIfIsFull() && (GameManager.instance.spawnedObjects.Find(x => x.name == e.data) == null) && !scoreManager.GetComponent<teamScore>().endGame)            
+            if (!spawnMangager.GetComponent<spawnState>().CheckIfIsFull() && (GameManager.instance.spawnedObjects.Find(x => x.name == data) == null) && !scoreManager.GetComponent<teamScore>().endGame)            
             {
                 //Si on ne trouve pas son nom dans la liste des joueurs instanciés,
                 //C'est un nouveau joueur. On doit donc l'instancier.
 
-                Debug.Log(e.data);// On affiche dans la console le pseudo joueur.
+
+                Debug.Log(data);// On affiche dans la console le pseudo joueur.
 
                 activePoint = spawnMangager.GetComponent<spawnState>().GetRandomPos();
 
@@ -71,11 +76,16 @@ public class SpawnControllableObjectsOverWS : MonoBehaviour
                                 Quaternion.identity);
                 tmp.GetComponent<ControlOverWS>().playerId = activePoint;
                 // On renome l'objet avec le pseudo du joueur.
-                tmp.name = e.data;
+                tmp.name = data;
+
+                string str = tmp.name;
+                string[] substrings = str.Split(new string[] { "\":\"" }, System.StringSplitOptions.None);
+                //string pseudo = substrings[1].Replace("\"}", "");
+
                 // On met à jour l'affichage de son pseudo. 
                 if (tmp.transform.GetComponentInChildren<TMPro.TextMeshPro>())
                 {
-                    tmp.transform.GetComponentInChildren<TMPro.TextMeshPro>().text = tmp.name.Replace("\"", "");
+                    tmp.transform.GetComponentInChildren<TMPro.TextMeshPro>().text = data;
                 }
                 // On ajouter le joueur à la liste des joueurs instanciés.
                 GameManager.instance.spawnedObjects.Add(tmp);
@@ -87,13 +97,13 @@ public class SpawnControllableObjectsOverWS : MonoBehaviour
                 uiTmp.transform.SetParent(GameManager.instance.scoreCanvas.transform);
                 Debug.Log("nb players " + GameManager.instance.spawnedObjects.Count);
                 uiTmp.GetComponent<RectTransform>().position = new Vector3((200 * GameManager.instance.spawnedObjects.Count), 1080 - 150, 0);
-                uiTmp.transform.Find("Pseudo").GetComponent<UnityEngine.UI.Text>().text = tmp.name.Replace("\"", "");
+                uiTmp.transform.Find("Pseudo").GetComponent<UnityEngine.UI.Text>().text = data;
                 tmp.GetComponent<ControlOverWS>().scoreDisplay = uiTmp;
                 GameManager.instance.scoreList.Add(uiTmp.GetComponent<ScoreData>());
             }
             else// Si le joueur est déjà dans la liste, on ne l'instancie pas à nouveau.
             {
-                Debug.Log("User" + e.data + " already exist");
+                Debug.Log("User" + data + " already exist");
             }
 
             //}

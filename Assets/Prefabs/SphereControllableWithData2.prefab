@@ -400,13 +400,14 @@ MonoBehaviour:
     type: 3}
   shootSpawnT1: {fileID: 8263405979713679086}
   shootSpawnT2: {fileID: 8661112629926740137}
-  force: {x: 500, y: 0}
+  forceBase: {x: 0, y: 0}
   team: 0
   playerId: 0
   personalPlayerScore: 0
   startManager: {fileID: 0}
   scoreManager: {fileID: 0}
   handSprite: {fileID: 6676821204027815955}
+  projectileSpeed: 600
 --- !u!136 &2653936427508835067
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -737,11 +738,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 22495902, guid: a6e39ced0ea046bcb636c3f0b2e2a745, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -0.114
+      value: -0.216
       objectReference: {fileID: 0}
     - target: {fileID: 22495902, guid: a6e39ced0ea046bcb636c3f0b2e2a745, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: 0.322
       objectReference: {fileID: 0}
     - target: {fileID: 22495902, guid: a6e39ced0ea046bcb636c3f0b2e2a745, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x

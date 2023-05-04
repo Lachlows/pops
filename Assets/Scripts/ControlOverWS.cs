@@ -35,7 +35,7 @@ public class ControlOverWS : MonoBehaviour
     Transform playerPosition;
     public Transform shootSpawnT1;
     public Transform shootSpawnT2;
-    public Vector2 force;
+   public Vector2 forceBase;
     public int team = 0;
     int spawnPlace = 0 ;
     public int playerId = 0;
@@ -48,6 +48,8 @@ public class ControlOverWS : MonoBehaviour
     public GameObject handSprite;
     Animator handAnim;
 
+
+    public float projectileSpeed;
 
     //public Transform[] transformList;
 
@@ -69,11 +71,23 @@ public class ControlOverWS : MonoBehaviour
         io = SocketIOController.instance;
 
         input1Action = (SocketIOEvent e) => {
+            string[] data = e.data.Replace("\"", "").Split(",");
+            Debug.Log("nom : "+data[0]+ "force : "+ data[1] + "angle : "+data[2]);
 
-            if (e.data == gameObject.name && startManager.GetComponent<startGame>().gameHasStart && !scoreManager.GetComponent<teamScore>().endGame)
+            if (data[0] == gameObject.name && startManager.GetComponent<startGame>().gameHasStart && !scoreManager.GetComponent<teamScore>().endGame)
             {
                 
                 Debug.Log("SHOOT");
+
+                string[] forceText = data[1].Split('.');
+                Debug.Log("force : " + forceText[0]);
+                float force = float.Parse(forceText[0]);
+
+                string[] angleText = data[2].Split('.');
+                Debug.Log("angle : " + angleText[0]);
+                float angle = float.Parse(angleText[0]);
+
+                Debug.Log("force : " + force + "angle : " + angle);
                 /*
                 if (directionMarker)
                 {
@@ -85,7 +99,7 @@ public class ControlOverWS : MonoBehaviour
                 }
                 rgbd.AddForce(direction * power, ForceMode.Impulse);
                 */
-                StartCoroutine(spawnWait());
+                StartCoroutine(spawnWait(force,angle));
                 //spawnProjectile();
                 isActif = true;
                 timer = 0;
@@ -95,7 +109,8 @@ public class ControlOverWS : MonoBehaviour
         };
 
         input2Action = (SocketIOEvent e) => {
-            if (e.data == gameObject.name)
+            string data = e.data.Replace("\"", "");
+            if (data == gameObject.name)
             {
                 leaveGame();
                 /*if (directionMarker)
@@ -226,22 +241,52 @@ public class ControlOverWS : MonoBehaviour
 
     }
 
-    void spawnProjectile()
+    void spawnProjectile(float forceP, float angle)
     {
+        //Vector2 forceVect = force;
+        Rigidbody rb;
+        forceP *= projectileSpeed * Time.deltaTime;
+
         if (team == 0)
         {
             GameObject projectile = Instantiate(popCornT, shootSpawnT1.position, shootSpawnT1.rotation);
             //popAction script = projectile.GetComponent<popAction>();
-            projectile.GetComponent<popAction>().teamId = 0;
-            projectile.GetComponent<Rigidbody>().AddForce(force);
+            rb = projectile.GetComponent<Rigidbody>();
+
+            float angleEnRadians = angle * Mathf.Deg2Rad;
+
+            Vector2 vecteur = new Vector2(forceP, 0);
+
+
+            float x = vecteur.x * Mathf.Cos(angleEnRadians) - vecteur.y * Mathf.Sin(angleEnRadians);
+            float y = vecteur.x * Mathf.Sin(angleEnRadians) + vecteur.y * Mathf.Cos(angleEnRadians);
+
+
+
+            rb.AddForce(new Vector2(y, x));
 
             projectile.GetComponent<popAction>().playerObject = gameObject;
         }
         else
         {
             GameObject projectile = Instantiate(popCornT, shootSpawnT2.position, shootSpawnT2.rotation);
-            projectile.GetComponent<popAction>().teamId = 1;
-            projectile.GetComponent<Rigidbody>().AddForce(-force);
+            /* projectile.GetComponent<popAction>().teamId = 1;
+             projectile.GetComponent<Rigidbody>().AddForce(-forceVect);*/
+
+            rb = projectile.GetComponent<Rigidbody>();
+
+
+            float angleEnRadians = angle * Mathf.Deg2Rad;
+
+            Vector2 vecteur = new Vector2(forceP, 0);
+
+
+            float x = vecteur.x * Mathf.Cos(angleEnRadians) - vecteur.y * Mathf.Sin(angleEnRadians);
+            float y = vecteur.x * Mathf.Sin(angleEnRadians) + vecteur.y * Mathf.Cos(angleEnRadians);
+
+
+
+            rb.AddForce(new Vector2(-y,-x));
 
             projectile.GetComponent<popAction>().playerObject = gameObject;
 
@@ -259,11 +304,11 @@ public class ControlOverWS : MonoBehaviour
     {
         personalPlayerScore += point;
     }
-    IEnumerator spawnWait()
+    IEnumerator spawnWait(float forceP, float angle)
     {
         handAnim.SetTrigger("shoot");
         yield return new WaitForSeconds(0.2f);
-        spawnProjectile();
+        spawnProjectile( forceP, angle);
     }
 
 }

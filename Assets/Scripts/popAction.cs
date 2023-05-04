@@ -16,8 +16,6 @@ public class popAction : MonoBehaviour
     public Color colorT2;
 
 
-
-
     private void Start()
     {
         scoreManager = GameObject.Find("teamScoreManager");
@@ -61,8 +59,11 @@ public class popAction : MonoBehaviour
             collision.gameObject.GetComponent<targetInfo>().life--;
             if (collision.gameObject.GetComponent<targetInfo>().life <= 0)
             {
-                playerScore.GetComponent<teamScore>().addinScoreToTeam(teamId, collision.gameObject.GetComponent<targetInfo>().pointToTeam);
-                playerObject.GetComponent<ControlOverWS>().addinScoreToPerso(collision.gameObject.GetComponent<targetInfo>().pointToTeam);
+                if (collision.gameObject.GetComponent<targetInfo>().allTeam || collision.gameObject.GetComponent<targetInfo>().teamIdTarget == teamId)
+                {
+                    playerScore.GetComponent<teamScore>().addinScoreToTeam(teamId, collision.gameObject.GetComponent<targetInfo>().pointToTeam);
+                    playerObject.GetComponent<ControlOverWS>().addinScoreToPerso(collision.gameObject.GetComponent<targetInfo>().pointToTeam);  
+                }
                 Destroy(collision.gameObject);
             }
             Destroy(gameObject);
