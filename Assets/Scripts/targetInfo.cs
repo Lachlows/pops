@@ -31,13 +31,24 @@ public class targetInfo : MonoBehaviour
     public int teamIdTarget = 0;
     public bool allTeam = true;
 
+    public bool canTurnOnSpawn = true;
+
+
+
     private void Start()
     {
+
+
         if(movable)
         {
             // initialisation de la direction aléatoire
             direction = new Vector3(Random.Range(-1f, 1f), Random.Range(-1f, 1f), 0f);
             direction.Normalize();
+        }
+
+        if (canTurnOnSpawn)
+        {
+            turnarget();
         }
     }
     void Update()
@@ -71,6 +82,18 @@ public class targetInfo : MonoBehaviour
 
             // met à jour la position de l'objet
             transform.position = newPosition;
+        }
+    }
+
+   void turnarget()
+    {
+        int randomNumber = Mathf.RoundToInt(Random.Range(-1f, 1f));
+        Vector3 scale;
+        if (randomNumber< 1)
+        {
+            scale = gameObject.transform.localScale;
+            scale.x = -scale.x;
+            gameObject.transform.localScale= scale ;
         }
     }
 }

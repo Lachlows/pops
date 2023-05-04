@@ -62,7 +62,7 @@ public class popAction : MonoBehaviour
                 if (collision.gameObject.GetComponent<targetInfo>().allTeam || collision.gameObject.GetComponent<targetInfo>().teamIdTarget == teamId)
                 {
                     playerScore.GetComponent<teamScore>().addinScoreToTeam(teamId, collision.gameObject.GetComponent<targetInfo>().pointToTeam);
-                    playerObject.GetComponent<ControlOverWS>().addinScoreToPerso(collision.gameObject.GetComponent<targetInfo>().pointToTeam);
+                    playerObject.GetComponent<ControlOverWS>().addinScoreToPerso(collision.gameObject.GetComponent<targetInfo>().pointToTeam);  
                 }
                 Destroy(collision.gameObject);
             }

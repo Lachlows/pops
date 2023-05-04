@@ -65,6 +65,7 @@ MonoBehaviour:
   changeDirectionTime: 2
   teamIdTarget: 1
   allTeam: 0
+  canTurnOnSpawn: 1
 --- !u!212 &944096845597131433
 SpriteRenderer:
   m_ObjectHideFlags: 0

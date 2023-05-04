@@ -48,7 +48,8 @@ public class SpawnControllableObjectsOverWS : MonoBehaviour
         // Et pour accèder précisément au pseudo du joueur. il faudra utiliser cette syntaxe: e.data
         io.On("spawn", (SocketIOEvent e) =>
         {
-            Debug.Log(e.data);          
+            Debug.Log(e.data); 
+            
             //if (activePoint < spawnPoints.Length) {
             // Lorsqu'on recoit un message "spawn".
             // On verifie qu'il n'existe pas déjà un joueur du même nom.
@@ -73,10 +74,15 @@ public class SpawnControllableObjectsOverWS : MonoBehaviour
                 tmp.GetComponent<ControlOverWS>().playerId = activePoint;
                 // On renome l'objet avec le pseudo du joueur.
                 tmp.name = e.data;
+
+                string str = tmp.name;
+                string[] substrings = str.Split(new string[] { "\":\"" }, System.StringSplitOptions.None);
+                //string pseudo = substrings[1].Replace("\"}", "");
+
                 // On met à jour l'affichage de son pseudo. 
                 if (tmp.transform.GetComponentInChildren<TMPro.TextMeshPro>())
                 {
-                    tmp.transform.GetComponentInChildren<TMPro.TextMeshPro>().text = tmp.name.Replace("\"", "");
+                    tmp.transform.GetComponentInChildren<TMPro.TextMeshPro>().text = substrings[1].Replace("\"}", "");
                 }
                 // On ajouter le joueur à la liste des joueurs instanciés.
                 GameManager.instance.spawnedObjects.Add(tmp);
@@ -88,7 +94,7 @@ public class SpawnControllableObjectsOverWS : MonoBehaviour
                 uiTmp.transform.SetParent(GameManager.instance.scoreCanvas.transform);
                 Debug.Log("nb players " + GameManager.instance.spawnedObjects.Count);
                 uiTmp.GetComponent<RectTransform>().position = new Vector3((200 * GameManager.instance.spawnedObjects.Count), 1080 - 150, 0);
-                uiTmp.transform.Find("Pseudo").GetComponent<UnityEngine.UI.Text>().text = tmp.name.Replace("\"", "");
+                uiTmp.transform.Find("Pseudo").GetComponent<UnityEngine.UI.Text>().text = substrings[1].Replace("\"}", "");
                 tmp.GetComponent<ControlOverWS>().scoreDisplay = uiTmp;
                 GameManager.instance.scoreList.Add(uiTmp.GetComponent<ScoreData>());
             }
