@@ -1,7 +1,9 @@
+const express = require('express');
 var app = require('express')();
 var http = require('http').Server(app);
 var io = require('socket.io')(http);
 
+app.use(express.static('public'));
 var count = 0
 
 app.get('/', function(req, res){
@@ -10,19 +12,13 @@ app.get('/', function(req, res){
 	//
 });
 
-
-
-app.get('/jquery', function(req, res){
-	count++;
-	res.sendFile(__dirname + '/jquery-3.6.4.min.js');
-	//
-});
-
-app.get('/index.css', function(req, res){
+app.get('/css', function(req, res){
 	count++;
 	res.sendFile(__dirname + '/index.css');
 	//
 });
+
+
 
 var userId = 0;
 
@@ -39,8 +35,8 @@ io.on('connection', function(socket){
   socket.on('input1', function(msg){
 		console.log(msg);
 		//msg = JSON.parse(msg);
-		console.log("a "+msg.pseudo+" user has pressed input1");
-		io.emit("input1",msg.pseudo);
+		console.log(msg);
+		io.emit("input1",msg);
   });
   
   socket.on('input2', function(msg){
