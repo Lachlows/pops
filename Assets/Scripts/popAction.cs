@@ -10,6 +10,11 @@ public class popAction : MonoBehaviour
     public int scoreMalus = -1;
 
     public GameObject playerObject;
+    public GameObject image;
+
+    public Color colorT1;
+    public Color colorT2;
+
 
 
 
@@ -21,10 +26,12 @@ public class popAction : MonoBehaviour
         if (teamId == 0)
         {
             GetComponent<Renderer>().material.color = Color.red;
+            image.GetComponent<Renderer>().material.color = colorT1;
         }
         else
         {
             GetComponent<Renderer>().material.color = Color.blue;
+            image.GetComponent<Renderer>().material.color = colorT2;
 
         }
     }
