@@ -11,9 +11,16 @@ app.get('/', function(req, res){
 });
 
 
+
 app.get('/jquery', function(req, res){
 	count++;
 	res.sendFile(__dirname + '/jquery-3.6.4.min.js');
+	//
+});
+
+app.get('/index.css', function(req, res){
+	count++;
+	res.sendFile(__dirname + '/index.css');
 	//
 });
 
