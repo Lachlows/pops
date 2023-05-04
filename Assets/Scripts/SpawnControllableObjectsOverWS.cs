@@ -48,6 +48,7 @@ public class SpawnControllableObjectsOverWS : MonoBehaviour
         // Et pour accèder précisément au pseudo du joueur. il faudra utiliser cette syntaxe: e.data
         io.On("spawn", (SocketIOEvent e) =>
         {
+            Debug.Log(e.data);          
             //if (activePoint < spawnPoints.Length) {
             // Lorsqu'on recoit un message "spawn".
             // On verifie qu'il n'existe pas déjà un joueur du même nom.

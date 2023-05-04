@@ -3,12 +3,12 @@ var http = require('http').Server(app);
 var io = require('socket.io')(http);
 
 var count = 0
-
+			
 app.get('/', function(req, res){
 	count++;
 	res.sendFile(__dirname + '/index.html');
-	//
 });
+<<<<<<< Updated upstream
 
 
 
@@ -19,6 +19,10 @@ app.get('/jquery', function(req, res){
 });
 
 app.get('/index.css', function(req, res){
+=======
+																							
+app.get('/css', function(req, res){
+>>>>>>> Stashed changes
 	count++;
 	res.sendFile(__dirname + '/index.css');
 	//

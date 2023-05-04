@@ -28,6 +28,8 @@ public class targetInfo : MonoBehaviour
 
     private Vector3 direction; // direction de déplacement
     private float timer; // compteur de temps
+    public int teamIdTarget = 0;
+    public bool allTeam = true;
 
     private void Start()
     {
