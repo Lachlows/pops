@@ -102,6 +102,7 @@ public class teamScore : MonoBehaviour
 
         IEnumerator ReloadCurrentScene()
         {
+            gameObject.GetComponent<AudioSource>().Play(0);
             yield return new WaitForSeconds(timeToRestart);
             SceneManager.LoadScene(0);
         }
