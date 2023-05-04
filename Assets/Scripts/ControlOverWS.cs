@@ -157,6 +157,14 @@ public class ControlOverWS : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (!startManager.GetComponent<startGame>().gameHasStart && scoreManager.GetComponent<teamScore>().endGame)
+        {
+            gameObject.GetComponent<Renderer>().enabled = false;
+        }
+                else{
+            gameObject.GetComponent<Renderer>().enabled = true;
+        }
+
         timer += Time.deltaTime;
         if (timer > inactifDelay)
         {
@@ -182,6 +190,7 @@ public class ControlOverWS : MonoBehaviour
 
     private void updateScore()
     {
+
         score += scoreIncr;
         //if(scoreDisplay)
         //scoreDisplay.GetComponent<ScoreData>().updateDisplay(score);
