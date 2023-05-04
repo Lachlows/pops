@@ -45,6 +45,8 @@ public class ControlOverWS : MonoBehaviour
     GameObject spawnMangager;
     public GameObject startManager;
     public GameObject scoreManager;
+    public GameObject handSprite;
+    Animator handAnim;
 
 
     //public Transform[] transformList;
@@ -52,6 +54,7 @@ public class ControlOverWS : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        handAnim = handSprite.GetComponent<Animator>();
         spawnMangager = GameObject.Find("spawnPoints");
         startManager = GameObject.Find("gameStarter");
         scoreManager = GameObject.Find("teamScoreManager");
@@ -82,7 +85,8 @@ public class ControlOverWS : MonoBehaviour
                 }
                 rgbd.AddForce(direction * power, ForceMode.Impulse);
                 */
-                spawnProjectile();
+                StartCoroutine(spawnWait());
+                //spawnProjectile();
                 isActif = true;
                 timer = 0;
                 
@@ -128,13 +132,14 @@ public class ControlOverWS : MonoBehaviour
                 if (i % 2 == 0)
                 {
                     team = 0;
-                    GetComponent<Renderer>().material.color = Color.red;
+                    //handSprite.GetComponent<Renderer>().material.color = Color.red;
                 }
                 else
                 {
                     team = 1;
-                    GetComponent<Renderer>().material.color = Color.blue;
+                    //GetComponent<Renderer>().material.color = Color.blue;
                 }
+                handAnim.SetInteger("team", team);
             }
 
         }
@@ -159,10 +164,10 @@ public class ControlOverWS : MonoBehaviour
     {
         if (!startManager.GetComponent<startGame>().gameHasStart && scoreManager.GetComponent<teamScore>().endGame)
         {
-            gameObject.GetComponent<Renderer>().enabled = false;
+            handSprite.gameObject.GetComponent<Renderer>().enabled = false;
         }
                 else{
-            gameObject.GetComponent<Renderer>().enabled = true;
+            handSprite.gameObject.GetComponent<Renderer>().enabled = true;
         }
 
         timer += Time.deltaTime;
@@ -239,6 +244,7 @@ public class ControlOverWS : MonoBehaviour
             projectile.GetComponent<Rigidbody>().AddForce(-force);
 
             projectile.GetComponent<popAction>().playerObject = gameObject;
+
         }
     }
     void leaveGame()
@@ -253,4 +259,11 @@ public class ControlOverWS : MonoBehaviour
     {
         personalPlayerScore += point;
     }
+    IEnumerator spawnWait()
+    {
+        handAnim.SetTrigger("shoot");
+        yield return new WaitForSeconds(0.2f);
+        spawnProjectile();
+    }
+
 }
