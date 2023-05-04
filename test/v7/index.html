@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="index.css">
+    <script src="jquery.min.js" type="text/javascript"></script>
+    <title>Catapulte</title>
+</head>
+<body>
+    <!--<div>
+        <img  class="tuto" src="../img/tuto.gif" loop>
+    </div>-->
+    <div id="container">
+        <div id="draggable"></div>
+        <!-- <button>
+            <a href="">  <img src="../img/logo_pops_v2.png" alt=""> </a>  
+        </button>-->
+      </div>
+      <script>
+        let draggable = document.getElementById('draggable');
+
+        let container = document.getElementById('container');
+        let isDragging = false;
+        let currentX;
+        let currentY;
+        let initialX;
+        let initialY;
+        let xOffset = 0;
+        let yOffset = 0;
+        let startPoint = {x: 0, y: 0};
+        let previousPoint = {x: 0, y: 0};
+    
+        container.addEventListener('touchstart', dragStart);
+        container.addEventListener('touchend', dragEnd);
+        container.addEventListener('touchmove', drag);
+    
+        function dragStart(e) {
+            initialX = e.touches[0].clientX - xOffset;
+            initialY = e.touches[0].clientY - yOffset;
+            // startPoint = {x: initialX, y: initialY};
+    
+            if (e.target === draggable) {
+                isDragging = true;
+            }
+        }
+    
+        function dragEnd(e) {
+            initialX = currentX;
+            initialY = currentY;
+            previousPoint = {x: currentX, y: currentY};
+            isDragging = false;
+    
+            // retourne le rond au point de départ
+            setTranslate(0, 0, draggable);
+            xOffset = 0;
+            yOffset = 0;
+    
+            console.log('Start Point:', startPoint);
+            console.log('Previous Point:', previousPoint);
+    
+            //calcul de l'angle
+            endPoint = {x: currentX, y: currentY};
+            let angle = Math.atan2(endPoint.y - startPoint.y, endPoint.x - startPoint.x) * (180) / Math.PI;
+            console.log("Angle de déplacement : " + angle);
+        }
+    
+        function drag(e) {
+            if (isDragging) {
+                e.preventDefault();
+    
+                currentX = e.touches[0].clientX - initialX;
+                currentY = e.touches[0].clientY - initialY;
+    
+                xOffset = currentX;
+                yOffset = currentY;
+    
+                setTranslate(currentX, currentY, draggable);
+            }
+        }
+    
+        function setTranslate(xPos, yPos, el) {
+            el.style.transform = "translate3d(" +  xPos + "px, " + yPos + "px, 0)";
+        }
+    </script>
+    
+      
+         
+
+      
+</body>
+</html>
