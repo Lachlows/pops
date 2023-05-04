@@ -128,12 +128,12 @@ public class ControlOverWS : MonoBehaviour
                 if (i % 2 == 0)
                 {
                     team = 0;
-                    GetComponent<Renderer>().material.color = Color.blue;
+                    GetComponent<Renderer>().material.color = Color.red;
                 }
                 else
                 {
                     team = 1;
-                    GetComponent<Renderer>().material.color = Color.red;
+                    GetComponent<Renderer>().material.color = Color.blue;
                 }
             }
 

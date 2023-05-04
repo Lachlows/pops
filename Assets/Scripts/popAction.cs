@@ -20,11 +20,11 @@ public class popAction : MonoBehaviour
 
         if (teamId == 0)
         {
-            GetComponent<Renderer>().material.color = Color.blue;
+            GetComponent<Renderer>().material.color = Color.red;
         }
         else
         {
-            GetComponent<Renderer>().material.color = Color.red;
+            GetComponent<Renderer>().material.color = Color.blue;
 
         }
     }
