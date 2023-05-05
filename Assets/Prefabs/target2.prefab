@@ -134,8 +134,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pointToTeam: 3
-  MinTimeSpawn: 5
-  MaxTimeSpawn: 8
+  MinTimeSpawn: 3.3333333
+  MaxTimeSpawn: 4
   MaxOfThisTarget: 3
   iSRangeTarget: 0
   minScale: 0.5
