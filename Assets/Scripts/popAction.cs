@@ -15,6 +15,7 @@ public class popAction : MonoBehaviour
     public Color colorT1;
     public Color colorT2;
 
+
     public List<AudioClip> audioClips = new List<AudioClip>();
 
     private void Start()
@@ -22,9 +23,7 @@ public class popAction : MonoBehaviour
         scoreManager = GameObject.Find("teamScoreManager");
         GameObject playerScore = GameObject.Find("teamScoreManager");
 
-        int randomIndex = Random.Range(0, audioClips.Count);
-        AudioClip randomClip = audioClips[randomIndex];
-        GetComponent<AudioSource>().PlayOneShot(randomClip);
+
 
         if (teamId == 0)
         {
@@ -43,12 +42,8 @@ public class popAction : MonoBehaviour
     {
         GameObject playerScore = GameObject.Find("teamScoreManager");
 
-        int randomIndex = Random.Range(0, audioClips.Count);
-        AudioClip randomClip = audioClips[randomIndex];
-
         if (collision.gameObject.tag == "Player")
         {
-            GetComponent<AudioSource>().PlayOneShot(randomClip);
 
             if (collision.gameObject.GetComponent<ControlOverWS>().team==0 && playerScore.GetComponent<teamScore>().ScoreT1>0)
             {
@@ -62,12 +57,13 @@ public class popAction : MonoBehaviour
             {
                 collision.gameObject.GetComponent<ControlOverWS>().addinScoreToPerso(scoreMalus);
             }
+            int randomIndex = Random.Range(0, audioClips.Count);
+            AudioClip randomClip = audioClips[randomIndex];
+            GetComponent<AudioSource>().PlayOneShot(randomClip);
             Destroy(gameObject);
         }
         else if (collision.gameObject.tag == "target")
         {
-            GetComponent<AudioSource>().PlayOneShot(randomClip);
-
 
             collision.gameObject.GetComponent<targetInfo>().life--;
             if (collision.gameObject.GetComponent<targetInfo>().life <= 0)
@@ -77,16 +73,25 @@ public class popAction : MonoBehaviour
                     playerScore.GetComponent<teamScore>().addinScoreToTeam(teamId, collision.gameObject.GetComponent<targetInfo>().pointToTeam);
                     playerObject.GetComponent<ControlOverWS>().addinScoreToPerso(collision.gameObject.GetComponent<targetInfo>().pointToTeam);  
                 }
-                Destroy(collision.gameObject);
+                StartCoroutine(Despawn(collision.gameObject));
             }
-            Destroy(gameObject);
-
+            else
+            {
+                int randomIndex = Random.Range(0, audioClips.Count);
+                AudioClip randomClip = audioClips[randomIndex];
+                GetComponent<AudioSource>().PlayOneShot(randomClip);
+                Destroy(gameObject);
+            }
         }
         else if (collision.gameObject.tag == "projectile")
         {
-            GetComponent<AudioSource>().PlayOneShot(randomClip);
-            if (collision.gameObject.GetComponent<ControlOverWS>().team!= teamId)
-            Destroy(gameObject);
+            if (collision.gameObject.GetComponent<ControlOverWS>().team != teamId)
+            {
+                int randomIndex = Random.Range(0, audioClips.Count);
+                AudioClip randomClip = audioClips[randomIndex];
+                GetComponent<AudioSource>().PlayOneShot(randomClip);
+                Destroy(gameObject);
+            }
         }
     }
     private void FixedUpdate()
@@ -95,5 +100,18 @@ public class popAction : MonoBehaviour
         {
             Destroy(gameObject);
         }
+    }
+
+    IEnumerator Despawn(GameObject target)
+    {
+        int randomIndex = Random.Range(0, audioClips.Count);
+        AudioClip randomClip = audioClips[randomIndex];
+        GetComponent<AudioSource>().PlayOneShot(randomClip);
+        target.GetComponent<targetInfo>().spotLight.intensity = 4f;
+
+        yield return new WaitForSeconds(0.2f);
+        Destroy(target);
+
+        Destroy(gameObject);
     }
 }

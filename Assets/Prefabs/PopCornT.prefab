@@ -155,6 +155,7 @@ MonoBehaviour:
   image: {fileID: 3713508983490579890}
   colorT1: {r: 1, g: 0.8627451, b: 0.8627451, a: 1}
   colorT2: {r: 0.8627451, g: 1, b: 1, a: 1}
+  spotLight: {fileID: 0}
   audioClips:
   - {fileID: 8300000, guid: f01e9d6903f4df24eb67013446b1eeb6, type: 3}
   - {fileID: 8300000, guid: 4604c2175ee7e59438fae273c4de3c56, type: 3}
@@ -239,7 +240,7 @@ Rigidbody:
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 48
   m_CollisionDetection: 0
 --- !u!82 &1058483900377303120
 AudioSource:

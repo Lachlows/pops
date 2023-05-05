@@ -32,8 +32,8 @@ Transform:
   m_LocalScale: {x: 2, y: 2, z: 2}
   m_ConstrainProportionsScale: 1
   m_Children:
-  - {fileID: 4075007953322998534}
   - {fileID: 3594774277454566426}
+  - {fileID: 4075007953322998534}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -67,6 +67,7 @@ MonoBehaviour:
   teamIdTarget: 0
   allTeam: 1
   canTurnOnSpawn: 1
+  spotLight: {fileID: 6267510119319197610}
 --- !u!212 &944096845597131433
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -179,7 +180,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1052076250989907182}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &638400131860532845
 SpriteRenderer:
@@ -263,7 +264,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1052076250989907182}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!108 &6267510119319197610
 Light:

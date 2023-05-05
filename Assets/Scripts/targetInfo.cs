@@ -33,6 +33,8 @@ public class targetInfo : MonoBehaviour
 
     public bool canTurnOnSpawn = true;
 
+    public Light spotLight;
+
 
 
     private void Start()
