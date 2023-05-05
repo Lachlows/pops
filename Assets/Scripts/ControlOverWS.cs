@@ -144,7 +144,7 @@ public class ControlOverWS : MonoBehaviour
             if (playerPosition.position == spawnPointPos[i].position)
             {
                 spawnPlace = i;
-                if (i % 2 == 0)
+                if (gameObject.transform.position.x < 0)
                 {
                     team = 0;
                     //handSprite.GetComponent<Renderer>().material.color = Color.red;
@@ -173,6 +173,8 @@ public class ControlOverWS : MonoBehaviour
 
 
     }
+
+
 
     // Update is called once per frame
     void Update()

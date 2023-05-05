@@ -15,11 +15,16 @@ public class popAction : MonoBehaviour
     public Color colorT1;
     public Color colorT2;
 
+    public List<AudioClip> audioClips = new List<AudioClip>();
 
     private void Start()
     {
         scoreManager = GameObject.Find("teamScoreManager");
         GameObject playerScore = GameObject.Find("teamScoreManager");
+
+        int randomIndex = Random.Range(0, audioClips.Count);
+        AudioClip randomClip = audioClips[randomIndex];
+        GetComponent<AudioSource>().PlayOneShot(randomClip);
 
         if (teamId == 0)
         {
@@ -38,9 +43,14 @@ public class popAction : MonoBehaviour
     {
         GameObject playerScore = GameObject.Find("teamScoreManager");
 
+        int randomIndex = Random.Range(0, audioClips.Count);
+        AudioClip randomClip = audioClips[randomIndex];
+
         if (collision.gameObject.tag == "Player")
         {
-            if(collision.gameObject.GetComponent<ControlOverWS>().team==0 && playerScore.GetComponent<teamScore>().ScoreT1>0)
+            GetComponent<AudioSource>().PlayOneShot(randomClip);
+
+            if (collision.gameObject.GetComponent<ControlOverWS>().team==0 && playerScore.GetComponent<teamScore>().ScoreT1>0)
             {
                 playerScore.GetComponent<teamScore>().addinScoreToTeam(0, scoreMalus);
 
@@ -56,6 +66,9 @@ public class popAction : MonoBehaviour
         }
         else if (collision.gameObject.tag == "target")
         {
+            GetComponent<AudioSource>().PlayOneShot(randomClip);
+
+
             collision.gameObject.GetComponent<targetInfo>().life--;
             if (collision.gameObject.GetComponent<targetInfo>().life <= 0)
             {
@@ -71,6 +84,8 @@ public class popAction : MonoBehaviour
         }
         else if (collision.gameObject.tag == "projectile")
         {
+            GetComponent<AudioSource>().PlayOneShot(randomClip);
+            if (collision.gameObject.GetComponent<ControlOverWS>().team!= teamId)
             Destroy(gameObject);
         }
     }

@@ -56,6 +56,24 @@ app.get('/back-red', function(req, res){
 	//
 });
 
+app.get('/marvinwoff2', function(req, res){
+	
+	res.sendFile(__dirname + '/public/fonts/marvin-regular-webfont.woff2');
+	//
+});
+
+app.get('/marvinwoff', function(req, res){
+	
+	res.sendFile(__dirname + '/public/fonts/marvin-regular-webfont.woff');
+	//
+});
+
+/*app.get('/lilita', function(req, res){
+	
+	res.sendFile(__dirname + '/public/fonts/LilitaOne-Regular.ttf');
+	//
+});*/
+
 
 
 var userId = 0;

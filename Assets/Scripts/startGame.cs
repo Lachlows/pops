@@ -6,6 +6,8 @@ public class startGame : MonoBehaviour
 {
     public GameObject canva;
     public GameObject spawnerMangger;
+    public GameObject mainAudio;
+
 
     public bool gameHasStart = false;
 
@@ -20,8 +22,16 @@ public class startGame : MonoBehaviour
     {
         if (!gameHasStart && spawnerMangger.GetComponent<spawnState>().playerNumber >= 2)
         {
-            canva.SetActive(false);
-            gameHasStart = true;
+            StartCoroutine(launchGame());
         }
     }
+
+    IEnumerator launchGame()
+    {
+        yield return new WaitForSeconds(4f);
+        mainAudio.SetActive(true);
+        canva.SetActive(false);
+        gameHasStart = true;
+    }
+
 }

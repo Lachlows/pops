@@ -33,6 +33,8 @@ public class teamScore : MonoBehaviour
 
     public float timeToRestart = 8f;
 
+    public GameObject mainAudio;
+
     private void Start()
     {
         //animatorBarreT1 = barreT1.GetComponent<Animator>();
@@ -102,7 +104,8 @@ public class teamScore : MonoBehaviour
 
         IEnumerator ReloadCurrentScene()
         {
-            gameObject.GetComponent<AudioSource>().Play(0);
+            //gameObject.GetComponent<AudioSource>().Play(0);
+            mainAudio.SetActive(false);
             yield return new WaitForSeconds(timeToRestart);
             SceneManager.LoadScene(0);
         }

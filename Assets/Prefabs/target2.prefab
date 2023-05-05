@@ -144,11 +144,12 @@ MonoBehaviour:
   minX: -9
   maxX: 9
   minY: -7
-  maxY: 7
+  maxY: 5
   speed: 5
   changeDirectionTime: 2
   teamIdTarget: 0
   allTeam: 1
+  canTurnOnSpawn: 1
 --- !u!212 &944096845597131433
 SpriteRenderer:
   m_ObjectHideFlags: 0
